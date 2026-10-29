@@ -9,6 +9,7 @@
   <a href="https://codecov.io/gh/TSGut/dACE.jl"><img src="https://codecov.io/gh/TSGut/dACE.jl/branch/main/graph/badge.svg" alt="Coverage"></a>
   <a href="https://tsgut.github.io/dACE.jl/dev/"><img src="https://img.shields.io/badge/docs-dev-blue.svg" alt="Documentation"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
+  <a href="https://doi.org/10.5281/zenodo.23762609"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.23762609.svg" alt="DOI"></a>
 </p>
 
 dACE.jl learns many-body interaction rules of collectives from trajectory data
