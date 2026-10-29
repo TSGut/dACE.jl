@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Julia ${{ matrix.julia-version }} tests
+    strategy:
+      matrix:
+        julia-version: ['1.11', '1.12']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: ${{ matrix.julia-version }}
+      - uses: julia-actions/cache@v2
+      # The checked-in manifest uses Julia 1.12 workspaces. Resolve afresh on
+      # 1.11 and register the local simulator needed by the test environment.
+      - name: Prepare Julia 1.11 environment
+        if: matrix.julia-version == '1.11'
+        run: julia --project=. -e 'using Pkg; rm("Manifest.toml"); Pkg.develop(path="lib/dACESwarms"); Pkg.instantiate()'
+      - name: Test dACE.jl
+        run: julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test(coverage=true)'
+      - name: Test dACESwarms
+        run: julia --project=lib/dACESwarms -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
+      - uses: julia-actions/julia-processcoverage@v1
+      - uses: codecov/codecov-action@v5
+        with:
+          files: lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+
+  docs:
+    name: Documentation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.12'
+      - uses: julia-actions/cache@v2
+      - name: Build and deploy documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          julia --project=docs -e 'using Pkg; Pkg.develop(path="."); Pkg.instantiate()'
+          julia --project=docs docs/make.jl

@@ -1,0 +1,26 @@
+name = "dACE"
+uuid = "760694aa-1976-4148-b0e7-62da52bdd066"
+version = "0.1.0"
+authors = ["Timon Salar Gutleb <timon.gutleb@gmail.com>"]
+
+[workspace]
+projects = ["test", "lib/dACESwarms", "lib/dACESwarms/test", "scripts/paper"]
+
+[deps]
+ACEfit = "ad31a8ef-59f5-4a01-b543-a85c2f73e95c"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+NeighbourLists = "2fcf5ba9-9ed4-57cf-b73f-ff513e316b9c"
+Polynomials4ML = "03c4bcba-a943-47e9-bfa1-b1661fc2974f"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+
+[compat]
+ACEfit = "0.3.1"
+LinearAlgebra = "1"
+NeighbourLists = "0.5.10"
+Polynomials4ML = "0.5.10"
+Random = "1"
+SparseArrays = "1"
+StaticArrays = "1.9"
+julia = "1.11"

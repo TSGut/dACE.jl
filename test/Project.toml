@@ -1,0 +1,8 @@
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+dACE = "760694aa-1976-4148-b0e7-62da52bdd066"
+dACESwarms = "67d274b1-1a35-4718-9d0f-0c9604033eeb"
