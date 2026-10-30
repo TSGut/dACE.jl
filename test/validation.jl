@@ -90,6 +90,7 @@
         @test_throws ArgumentError rollout(mp, X[:, :, 1], V[:, :, 1], 0.0, 2)
         # a rollout whose velocities overflow stops with a RolloutDivergence
         @test_throws RolloutDivergence rollout(dACEModel(mp.basis, fill(1.0e308, length(mp.c))), X[:, :, 1], V[:, :, 1], 0.1, 3)
+        @test occursin("step 3", sprint(showerror, RolloutDivergence(3)))
         @test_throws ArgumentError dACEBasis(maxdeg = (2,), vscale = 0.0)
         @test_throws ArgumentError dACE.FrameBasis(maxdeg = (2,), cutoff = Inf)
 

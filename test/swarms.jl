@@ -6,6 +6,8 @@
         test_envs, test_accs = swarm_data(pair, 101:103)
         m2 = fit(dACEBasis(maxdeg = (4, 8)), envs, accs)
         @test rmse(m2, test_envs, test_accs; relative = true) < 0.01
+        # the true rule as a model of one's own, through the generic prediction path
+        @test rmse(TrueModel(pair), test_envs, test_accs; relative = true) < 1.0e-6
 
         m3 = fit(dACEBasis(maxdeg = (4, 8, 4)), envs, accs)
         @test rmse(m3, test_envs, test_accs; relative = true) < 0.01
@@ -116,6 +118,9 @@
         test_envs, test_accs = swarm_data3(mixed, 101:103)
         m4 = fit(heading_bases(maxdeg = (4, 8, 5, 4), maxa = 1), envs, accs)
         @test rmse(m4, test_envs, test_accs; relative = true) < 0.025
+        tr = simulate(mixed; n_agents = 20, nsteps = 5, seed = 7, extent = (100.0, 100.0, 100.0), spread = 10.0, speeds = (0.2, 2.5), dt = 0.05)
+        pos, vel = rollout(m4, tr.pos[:, :, 1], tr.vel[:, :, 1], tr.dt, 5; extent = tr.extent, periodic = true)
+        @test size(pos) == size(tr.pos) && all(isfinite, pos) && all(isfinite, vel)
         learned = [body_order_contributions(m4, e) for e in test_envs]
         truth = true_orders.(Ref(mixed), test_envs)
         for N in 1:4

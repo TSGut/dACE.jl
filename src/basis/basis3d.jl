@@ -18,8 +18,6 @@ struct OneParticle3
     j::Int
 end
 
-OneParticle3(n, a, mr, l, b, mu) = OneParticle3(n, a, mr, l, b, mu, 0, 0)
-
 degree(φ::OneParticle3) = φ.n + φ.a + abs(φ.mr) + 2φ.l + φ.b + abs(φ.mu) + abs(φ.k) + φ.j
 
 charge(φ::OneParticle3) = φ.mr + φ.mu + φ.k

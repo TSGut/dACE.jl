@@ -61,6 +61,7 @@
         end
         cq = real(dACE.lsq_solve(dACE.qr_statistics(complex.([Bi ti]), K; chunksize = 300); λ, reflections = true))
         @test norm(cq - reference) / norm(reference) < 1.0e-8
+        @test real(dACE.lsq_solve(dACE.qr_statistics([Bi ti], K; chunksize = 300); λ, reflections = true)) ≈ cq
         # model level: both methods, both symmetries, with the smoothness prior
         envs, accs = swarm_data(pair, 1:2)
         b = dACEBasis(maxdeg = (4, 6))
@@ -110,6 +111,11 @@
         b = dACEBasis(maxdeg = (4, 6))
         m = fit_ar1(b, envs, F .+ η, penvs, pF .+ ηp; λ = 1.0e-2, prior = nothing)
         @test m isa ARModel && abs(m.ρ - 0.8) < 0.03
+        # the AR model predicts and rolls out as its force law: the noise model is not part of the force
+        @test predict(m, envs[1]) == predict(m.model, envs[1]) && predict(m, envs[1:3]) == predict(m.model, envs[1:3])
+        tr = simulate(pair; n_agents = 30, nsteps = 5, seed = 1, extent = (100.0, 100.0), spread = 12.0, speeds = (0.2, 2.5), dt = 0.05)
+        @test rollout(m, tr.pos[:, :, 1], tr.vel[:, :, 1], tr.dt, 5; extent = tr.extent, periodic = true) ==
+            rollout(m.model, tr.pos[:, :, 1], tr.vel[:, :, 1], tr.dt, 5; extent = tr.extent, periodic = true)
         # λ by the evidence of the quasi-differenced fit (default)
         me = fit_ar1(b, envs, F .+ η, penvs, pF .+ ηp; prior = nothing)
         @test me.model.λ in dACE.EVIDENCE_GRID && abs(me.ρ - 0.8) < 0.03

@@ -84,5 +84,3 @@ function foreach_workspace(f, basis, n; works = nothing)
 end
 
 evaluation_workspaces(basis) = EvaluationWorkspace(basis)
-
-evaluation_workspaces(bases::Tuple) = map(evaluation_workspaces, bases)

@@ -34,9 +34,6 @@ function solve_normal_equations(G, h; λ = 1.0e-6, prior = nothing, reflections 
     return complex.(rhs ./ s)
 end
 
-normal_equations_fit(basis, envs, targets; λ = 1.0e-6, prior = nothing, chunksize = 2000, reflections = false) =
-    solve_normal_equations(accumulate_normal_equations(basis, envs, targets; chunksize)...; λ, prior, reflections)
-
 # the stages of `staged_solve` on accumulated normal equations
 function staged_normal_equations(G, h, basis; λ, λself = λ, prior = nothing, reflections = false, self_fit = :staged)
     c = zeros(ComplexF64, length(h))

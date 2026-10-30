@@ -9,6 +9,12 @@
         @test maximum(dACE.correlation_order, basis.funcs) == 3
         @test evaluate(basis, env) ≈ brute_force(basis, env)
         @test dACE.evaluate_direct(basis, env) ≈ brute_force(basis, env)
+        # pooled features add over neighbours, and the Legendre recurrence matches the closed forms
+        part(e, js) = Environment(e.v, e.r[js], e.u[js])
+        P = basis.purification
+        @test dACE.pooled_features(basis, P, env) ≈ dACE.pooled_features(basis, P, part(env, 1:3)) + dACE.pooled_features(basis, P, part(env, 4:6))
+        x = 0.3
+        @test dACE.legendre_table(x, 4) ≈ [1, x, (3x^2 - 1) / 2, (5x^3 - 3x) / 2, (35x^4 - 30x^2 + 3) / 8]
         for b in (
                 dACEBasis(maxdeg = (2, 3, 3, 2), maxl = 1, maxm = 2), dACEBasis(maxdeg = (4, 8, 6)),
                 dACEBasis(maxdeg = (4, 8), maxl = 0, maxm = 1), socialforce_basis(),
@@ -95,6 +101,8 @@
         env3 = Environment3(SVector(2.0, -1.0, 3.0), SVector{3, Float64}[SVector(1.0, 0.5, -0.3), SVector(-0.4, 2.0, 1.0)],
             SVector{3, Float64}[SVector(3.0, 0.0, 1.0), SVector(-1.0, 4.0, 0.0)])
         @test all(b -> evaluate(b, env3) ≈ brute_force(b, env3), hb)
+        part3(e, j) = Environment3(e.v, e.r[j:j], e.u[j:j])
+        @test all(b -> dACE.pooled_features(b, b.purification, env3) ≈ dACE.pooled_features(b, b.purification, part3(env3, 1)) + dACE.pooled_features(b, b.purification, part3(env3, 2)), hb)
     end
 
     @testset "invariant (charge-0) basis" begin

@@ -127,6 +127,8 @@
         @test evaluate(cb, hs[1]) ≈ [evaluate(ib, hs[1]); evaluate(cb.selfterm, hs[1])]
         mc = fit(cb, hs, A; λ = 1.0e-8, reflections = true)
         @test mc isa dACEModel{<:CompositeBasis} && predict(mc, hs[1:5]) ≈ [predict(mc, x) for x in hs[1:5]]
+        # the two parts must agree on the past they need
+        @test_throws ArgumentError dACE.basis_history(CompositeBasis(dACEBasis(maxdeg = (2,), history = History(selfterm = 1)), dACEBasis(maxdeg = (2,), history = History(selfterm = 2))))
     end
 
     @testset "interaction history (the agent's own past in the reactions to neighbours)" begin
@@ -173,6 +175,9 @@
         @test with.c[P] ≈ fit(dACEBasis(; kw...), envs, targets).c
         @test fit(bw, envs, targets; λ = with.λ, λself = with.λself, method = :normal_equations).c ≈ with.c rtol = 1.0e-5
         @test fit_path(bw, envs, targets; λs = [1.0e-3, with.λ], λself = with.λself)[end].c ≈ with.c
+        # validation-based selection: the own stage reuses the interactions' λ
+        Sw, Svw = design_statistics(bw, envs, targets), design_statistics(bw, envs[1:300], targets[1:300])
+        @test all(in([1.0e-2, 1.0e-4]), dACE.select_staged(Sw, Svw, bw; λs = [1.0e-2, 1.0e-4]))
     end
 
     @testset "neighbour history (neighbours' past states)" begin

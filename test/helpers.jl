@@ -78,4 +78,10 @@ function true_orders(rule, e)
 end
 rms(xs) = sqrt(mean(norm.(xs) .^ 2))
 
+# a model of one's own, the true rule, through the generic `predict` and `rmse`
+struct TrueModel{R}
+    rule::R
+end
+dACE.predict(m::TrueModel, e) = acceleration(m.rule, e.v, nbrs(e))
+
 small(maxdeg) = dACEBasis(; maxdeg, maxl = 0, maxm = 1)

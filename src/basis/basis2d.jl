@@ -16,8 +16,6 @@ struct OneParticle
     k::Int
 end
 
-OneParticle(n, l, mr, mu) = OneParticle(n, l, mr, mu, 0, 0)
-
 degree(φ::OneParticle) = φ.n + 2φ.l + abs(φ.mr) + abs(φ.mu) + 2φ.q + abs(φ.k)
 
 charge(φ::OneParticle) = φ.mr + φ.mu + φ.k

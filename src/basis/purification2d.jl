@@ -19,12 +19,7 @@ struct Purification{TR, TV}
     speed::TV
 end
 
-# Legendre coefficients of a polynomial from its values at `x`
-function legendre_coefficients(basis, x, f)
-    V = P4ML.evaluate(basis, x)
-    return legendre_coefficients(qr(V, ColumnNorm()), f)
-end
-
+# Legendre coefficients of a polynomial from its values at the nodes of `factor` (the QR of the Vandermonde matrix)
 function legendre_coefficients(factor::Factorization, f)
     c = factor \ f
     c[abs.(c) .< 1.0e-13 * max(1.0, maximum(abs, c))] .= 0
