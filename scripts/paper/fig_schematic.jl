@@ -55,7 +55,7 @@ let
     others = ([2.0, 1.3], [0.2, 2.2], [1.9, -1.2])
     names = ["j", "k", "l"]
     forces = ([-0.2, -1.0], [0.35, -0.95], [0.4, 0.95], [1.0, -0.35])
-    titles = ["F⁽¹⁾: 1-body", "F⁽²⁾: 2-body", "F⁽³⁾: 3-body", "F⁽⁴⁾: 4-body"]
+    titles = ["1-body", "2-body", "3-body", "4-body"]
     for N in 0:3
         a = Axis(gl[1, N + 1]; aspect = AxisAspect(1), limits = (-1.6, 2.8, -2.2, 2.8), title = titles[N + 1], titlesize = TITLE)
         hidedecorations!(a)

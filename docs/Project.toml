@@ -4,4 +4,4 @@ dACE = "760694aa-1976-4148-b0e7-62da52bdd066"
 
 [compat]
 Documenter = "1"
-julia = "1.11"
+julia = "1.12"

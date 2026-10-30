@@ -19,7 +19,7 @@ in 2D and 3D.
 
 ## Installation
 
-Requires Julia 1.11 or later.
+Requires Julia 1.12 or later.
 
 The package is a companion to the paper and is not yet registered.
 
@@ -40,8 +40,8 @@ For examples, see [the documentation](https://tsgut.github.io/dACE.jl/dev/).
 
 The paper detailing the theoretical background of the dACE approach is the primary reference for this package: (TODO)
 
-If you find this package useful, please also cite it using its (TODO Zenodo link).
-
+If you find this package useful, please also cite the software itself through its Zenodo record,
+[10.5281/zenodo.23762609](https://doi.org/10.5281/zenodo.23762609), which resolves to the latest release.
 
 ## Related Packages
 

@@ -11,7 +11,7 @@ agent's heading frame, or a fixed vertical frame for systems with gravity.
 
 ## Installation
 
-Requires Julia 1.11 or later. The package is not yet registered. Install it
+Requires Julia 1.12 or later. The package is not yet registered. Install it
 directly from GitHub:
 
 ```julia

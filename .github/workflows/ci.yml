@@ -10,7 +10,7 @@ jobs:
     name: Julia ${{ matrix.julia-version }} tests
     strategy:
       matrix:
-        julia-version: ['1.11', '1.12']
+        julia-version: ['1.12', '1']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,11 +18,6 @@ jobs:
         with:
           version: ${{ matrix.julia-version }}
       - uses: julia-actions/cache@v2
-      # The checked-in manifest uses Julia 1.12 workspaces. Resolve afresh on
-      # 1.11 and register the local simulator needed by the test environment.
-      - name: Prepare Julia 1.11 environment
-        if: matrix.julia-version == '1.11'
-        run: julia --project=. -e 'using Pkg; rm("Manifest.toml"); Pkg.develop(path="lib/dACESwarms"); Pkg.instantiate()'
       - name: Test dACE.jl
         run: julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test(coverage=true)'
       - name: Test dACESwarms

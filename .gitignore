@@ -1,5 +1,4 @@
 Manifest*.toml
-!/Manifest.toml
 /docs/build/
 /data/
 *.jld2

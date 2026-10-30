@@ -59,9 +59,9 @@ function main()
         :social_gain => r2["self3"] - r2["self1"],
         :wins => (two_over_one = wins("self2", "self1"), three_over_two = wins("self3", "self2"), three_over_one = wins("self3", "self1")))
     if GAP == 0
-        # saturation of the interaction part (the memoryless interactions of the staged fit) fitted on all trials but 150-fish
+        # saturation of the interaction part (the memoryless interactions of the staged fit) fitted on all trials
         b3 = only(b for (o, b) in bases if o == "self3")
-        mi3 = interaction_part(fitstaged("self3", b3, setdiff(SHINER_TRIALS, ["150-fish"])))
+        mi3 = interaction_part(fitstaged("self3", b3, SHINER_TRIALS))
         sat = Dict{Int, Vector{NTuple{6, Float64}}}()
         for t in SHINER_TRIALS, x in data[t][1][1:4:end]
             C = body_order_contributions(mi3, x)
