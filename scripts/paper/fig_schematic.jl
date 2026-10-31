@@ -57,7 +57,10 @@ let
     forces = ([-0.2, -1.0], [0.35, -0.95], [0.4, 0.95], [1.0, -0.35])
     titles = ["1-body", "2-body", "3-body", "4-body"]
     for N in 0:3
-        a = Axis(gl[1, N + 1]; aspect = AxisAspect(1), limits = (-1.6, 2.8, -2.2, 2.8), title = titles[N + 1], titlesize = TITLE)
+        # x limits centred on what the panel draws, so that the centred title sits over the drawing
+        xs = [0.0, forces[N + 1][1], (p[1] for p in others[1:N])...]
+        cx = (minimum(xs) + maximum(xs)) / 2
+        a = Axis(gl[1, N + 1]; aspect = AxisAspect(1), limits = (cx - 2.2, cx + 2.2, -2.2, 2.8), title = titles[N + 1], titlesize = TITLE, titlealign = :center)
         hidedecorations!(a)
         hidespines!(a)
         pts = [[0.0, 0.0], others[1:N]...]

@@ -24,12 +24,11 @@ function synchronous_step!(model)
     rule = model.rule
     r = interaction_radius(rule)
     ids = sort!(collect(allids(model)))
+    # Brute-force neighbour search, avoiding Agents.jl's odd (possibly bugged?) neighbour search.
     newvel = map(ids) do id
         a = model[id]
-        neighbours = [
-            (get_direction(a.pos, b.pos, model), b.vel)
-            for b in nearby_agents(a, model, r; search = :exact)
-        ]
+        candidates = [(get_direction(a.pos, model[jd].pos, model), model[jd].vel) for jd in ids if jd != id]
+        neighbours = filter(dv -> norm(dv[1]) < r, candidates)
         velocity_update(rule, a.vel, neighbours, model.dt)
     end
     all(v -> all(isfinite, v) && norm(v) < 1.0e3, newvel) || error(
