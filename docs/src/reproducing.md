@@ -9,7 +9,7 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
 
 The package versions the paper was produced with are in the manifest of version 0.1.1, archived
-on [Zenodo](https://doi.org/10.5281/zenodo.23762610).
+on [Zenodo](https://doi.org/10.5281/zenodo.23849286).
 
 ## Benchmarks
 
