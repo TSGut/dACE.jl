@@ -1,6 +1,6 @@
 name = "dACE"
 uuid = "760694aa-1976-4148-b0e7-62da52bdd066"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Timon Salar Gutleb <timon.gutleb@gmail.com>"]
 
 [workspace]

@@ -4,7 +4,7 @@
 # order 1) and products over two different channels (temporal order 2).
 
 # P_n(2|ṽ| - 1) ṽ⊥^{m0} ∏ₜ P_qₜ(2|x̃⊥| - 1) x̃⊥^{mₜ} P_jₜ(x̃₃), x̃ the scaled state of channel cₜ (`scaled`, the
-# basis speed map) in the frame of the current heading (2D: x̃⊥ = ê* x̃, invariant, output ê^charge; 3D: x̃⊥ the
+# basis speed map) in the frame of the current heading (2D: x̃⊥ = ê* x̃, invariant, output ê^charge, 3D: x̃⊥ the
 # component in the plane of the basis frame, m0 + Σ mₜ = charge). The angular factors are powers of the scaled
 # states, not of their directions, as for the neighbours, so the functions are continuous and equivariant where a
 # state (in 3D its perpendicular part, as in straight-line motion) vanishes. With the linear speed map,
@@ -94,7 +94,7 @@ function heading_direction(env)
     return zero(ComplexF64)
 end
 
-# values of the self term at `env` into `out`; `frame`: the basis frame in 3D; `w`: scratch (SelfWorkspace)
+# values of the self term at `env` into `out`, with `frame` the basis frame in 3D and `w` scratch (SelfWorkspace)
 function self_values!(out, s::SelfTerm, env, charge, frame = nothing, w = SelfWorkspace(s))
     check_history(env, maximum(last, s.channels))
     legendre_table!(w.P0, 2norm(scaled(env.v, s.vscale, s.inputmap)) - 1, s.D)
@@ -136,7 +136,7 @@ end
 
 self_prior(s::SelfTerm; p = 4) = [1 + degree(f)^p for f in s.funcs]
 
-# columns of the self term follow the interaction functions; all belong to the 1-body term
+# columns of the self term follow the interaction functions, all belong to the 1-body term
 nself(basis) = isnothing(basis.selfterm) ? 0 : length(basis.selfterm)
 
 function fill_self!(out, basis, env, frame = nothing, w = self_workspace(basis.selfterm))

@@ -67,7 +67,7 @@ function evidence_joint(S::QRStatistics; prior = nothing, reflections = false)
 end
 
 # the regularisation that maximises the evidence of the fit on `S` (`fit` with `λ = :evidence`) and the coefficients
-# with it: joint, one `λ`; staged, one per stage, those given as numbers kept (and the later stages chosen on the
+# with it: joint, one `λ`, staged, one per stage, those given as numbers kept (and the later stages chosen on the
 # residual they leave)
 function evidence_lambdas(S::QRStatistics, basis; λ = :evidence, λself = λ, prior = smoothness_prior(basis), reflections = false,
         self_fit = :staged)

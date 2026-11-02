@@ -1,5 +1,5 @@
 # Run from the repository root: julia --project=. -t 4 scripts/benchmarks/performance.jl
-# Warmed medians and minimum allocated bytes; no timing assertions in the test suite.
+# Warmed medians and minimum allocated bytes, no timing assertions in the test suite.
 using dACE, LinearAlgebra, Random, StaticArrays
 BLAS.set_num_threads(1)
 

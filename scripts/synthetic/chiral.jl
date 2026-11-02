@@ -1,9 +1,8 @@
-# julia -t 5 --project=scripts/paper scripts/synthetic/chiral.jl
+# julia -t auto --project=scripts/paper scripts/synthetic/chiral.jl
 #
-# Chiral rules (Figure 7): the chiral collectives of setup.jl (CHIRAL_SWARMS, 2D), splits 1-3, the 2- and 4-body
-# models fitted with complex coefficients (chiral rules allowed) and with real coefficients (mirror symmetric),
-# from one set of streamed statistics, λ by the evidence in both: relative force error on the test simulations.
-# out: results/chiral.csv (appended, one line per fit pair, so a partial run is kept)
+# Chiral rules (Figure 6): the 2- and 4-body models with complex and with real coefficients on the chiral
+# collectives of setup.jl, splits 1-3, relative force error on the test simulations.
+# out: results/chiral.csv (appended, one line per fit pair)
 
 include(joinpath(@__DIR__, "..", "paper", "setup.jl"))
 

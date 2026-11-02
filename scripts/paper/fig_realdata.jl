@@ -1,10 +1,7 @@
 # julia --project=scripts/paper scripts/paper/fig_realdata.jl [outdir]
 #
-# Figures 10 and 11, from scripts/realdata/consistency.jl and shiners_protocol.jl (results/):
-#   fig_realdata_{zebrafish,shiners}.pdf  disagreement between the force laws learned from two disjoint halves of
-#     the data against the samples per half, single held-out groups faint and their mean bold
-#   fig_shiner_saturation.pdf  the mean components of the learned 2-body part, the 3-body part and their sum along
-#     the 2-body response, against the number of neighbours within 3 BL
+# Figures 9 and 10 (fig_realdata_{zebrafish,shiners}.pdf, fig_shiner_saturation.pdf), from
+# scripts/realdata/consistency.jl and shiners_protocol.jl (results/)
 
 isdefined(@__MODULE__, :SIM) || include(joinpath(@__DIR__, "setup.jl"))
 
@@ -24,7 +21,7 @@ let
         for pts in curves   # each held-out group, faint
             lines!(ax, pts; color = (COLOR["d3"], 0.25), linewidth = 0.6)
         end
-        # mean over the held-out groups at the sizes all of them reach; the largest size (all the data) differs
+        # mean over the held-out groups at the sizes all of them reach, the largest size (all the data) differs
         # between groups and enters at its mean
         sizes = sort(collect(intersect((Set(round(Int, p[1]) for p in pts[1:(end - 1)]) for pts in curves)...)))
         mean_at(n) = mean(p[2] for pts in curves for p in pts if round(Int, p[1]) == n)

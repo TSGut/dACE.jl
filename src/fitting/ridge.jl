@@ -23,7 +23,7 @@ end
 
 # The SVD of the scaled design [A/(s√γ)] and the projected targets, from which the fit follows for any λ. The scaled
 # design is built once and the SVD works in place on it. Divide and conquer (xGESDD) is fast but occasionally fails to
-# converge on ill-conditioned matrices; QR iteration (xGESVD) then takes over, on a fresh copy.
+# converge on ill-conditioned matrices, QR iteration (xGESVD) then takes over, on a fresh copy.
 function scaled_svd(A, b; prior = nothing)
     K = size(A, 2)
     s = [norm(view(A, :, k)) for k in 1:K]

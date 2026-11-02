@@ -1,4 +1,4 @@
-# ZEBRAFISH_R=8 ZEBRAFISH_GAP=0 julia -t 5 --project=scripts/paper scripts/realdata/zebrafish_protocol.jl
+# ZEBRAFISH_R=8 ZEBRAFISH_GAP=0 julia -t auto --project=scripts/paper scripts/realdata/zebrafish_protocol.jl
 #
 # Zebrafish (Section 4): leave one video out, the 1-, 2- and 3-body laws without past and with the self term,
 # scored by held-out next-step R² on the 2023 tracking and, if DATA/zebrafish2019 exists, on the 2019 tracking.

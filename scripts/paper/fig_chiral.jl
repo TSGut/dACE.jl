@@ -1,6 +1,6 @@
 # julia --project=scripts/paper scripts/paper/fig_chiral.jl [outdir]
 #
-# Figure 7, from the fits of the chiral collectives with complex and with real coefficients
+# Figure 6, from the fits of the chiral collectives with complex and with real coefficients
 # (scripts/synthetic/chiral.jl, results/chiral.csv):
 #   fig_chiral{,_legend}.pdf  relative force error of dACE 4-body, complex and real, on every chiral collective, median and range
 

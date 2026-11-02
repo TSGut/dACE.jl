@@ -1,6 +1,6 @@
 name = "dACESwarms"
 uuid = "67d274b1-1a35-4718-9d0f-0c9604033eeb"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Timon Salar Gutleb <timon.gutleb@gmail.com>"]
 
 [deps]

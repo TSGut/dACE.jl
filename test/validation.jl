@@ -143,7 +143,7 @@
         @test_throws DimensionMismatch trajectory_data(P, W[:, 1:3, :], 0.1; cutoff = 2.0)
         @test_throws ArgumentError trajectory_data(P, W, 0.1; cutoff = 2.0, times = 1:5)
         @test length(first(trajectory_data(P, W, 0.1; cutoff = 2.0))) == 4 * 4
-        # an agent at rest faces its latest non-zero past velocity (equivariant); one that has not moved has no
+        # an agent at rest faces its latest non-zero past velocity (equivariant), one that has not moved has no
         # charged self features
         hz = History(selfterm = 1:2, selfterm_degree = (2, 2), selfterm_maxm = 1)
         b1 = dACEBasis(maxdeg = (2,), history = hz)
@@ -156,7 +156,7 @@
             @test predict(m1, rotate(e, 0.7)) ≈ rotation(0.7) * predict(m1, e)
             @test norm(predict(m1, e)) > 0
         end
-        # 1 in 3D: the heading frame of an agent at rest is that of its latest non-zero past velocity; without one,
+        # 1 in 3D: the heading frame of an agent at rest is that of its latest non-zero past velocity, and without one,
         # every heading-frame feature is 0
         hp3, ha3 = heading_bases(maxdeg = (2, 2), maxa = 1, history = hz)
         m3 = FrameModel(hp3, ones(length(hp3)), ha3, ones(length(ha3)))

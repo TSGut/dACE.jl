@@ -1,4 +1,4 @@
-# 3D: bases in a frame, the heading frame e₃ = v̂ᵢ or the fixed vertical frame e₃ = ẑ; rotations about e₃ by
+# 3D: bases in a frame, the heading frame e₃ = v̂ᵢ or the fixed vertical frame e₃ = ẑ, rotations about e₃ by
 # the 2D charge rule (at rest, e₃ is the direction of the latest non-zero past velocity, `heading_vector`)
 
 """
@@ -48,7 +48,7 @@ function reflect(env::Environment3)
 end
 
 # The heading of a 3D agent: its velocity or, at rest, its latest non-zero past velocity (an animal that stops keeps
-# facing the way it moved); `nothing` if it has not moved in any stored step.
+# facing the way it moved), `nothing` if it has not moved in any stored step.
 function heading_vector(env::Environment3)
     norm(env.v) > 0 && return env.v
     for w in env.past_v

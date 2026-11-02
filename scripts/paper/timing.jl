@@ -1,9 +1,7 @@
-# julia -t 5 --project=scripts/paper scripts/paper/timing.jl [outdir]
+# julia -t auto --project=scripts/paper scripts/paper/timing.jl [outdir]
 #
-# Cost of the 2D 4-body model on the 2+3+4-body benchmark (the training data of figures.jl), on all Julia threads,
-# BLAS at its default: evaluation of its basis (DEGREES in setup.jl) per
-# environment, as the wall time of the package's threaded evaluation of all test environments divided by their
-# number (median of 9 passes), and the fit with λ by the evidence (fitcv, median of 3). The load average before and after is recorded.
+# Cost of the 2D 4-body model on the 2+3+4-body benchmark: basis evaluation per environment (median of 9 passes
+# over the test environments) and the fit with λ by the evidence (median of 3), on all Julia threads.
 # Writes OUT/numbers_timing.tex.
 
 include(joinpath(@__DIR__, "setup.jl"))

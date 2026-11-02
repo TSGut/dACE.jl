@@ -65,7 +65,7 @@ function ar_solve_λ(S::QRStatistics; λ = :evidence, prior = nothing, reflectio
     return c, ρ, λρ
 end
 
-# the persistence ρ = ⟨e(t - Δ), e(t)⟩ / |e(t - Δ)|², clamped to (-1, 1); when the lagged residual vanishes
+# the persistence ρ = ⟨e(t - Δ), e(t)⟩ / |e(t - Δ)|², clamped to (-1, 1), and when the lagged residual vanishes
 # (relative to the lagged targets, `scale`) ρ is not identified and taken as 0
 function persistence(num, den, scale)
     den > 1.0e-12 * max(scale, floatmin()) || return 0.0

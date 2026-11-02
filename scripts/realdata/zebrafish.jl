@@ -1,8 +1,8 @@
 # Zebrafish (Heras et al. 2019, https://doi.org/10.1371/journal.pcbi.1007354): the idtracker.ai trajectories of
 # groups of 60, 80 and 100 fish, as DATA/zebrafish/<video>.h5 (positions (2, fish, frames) in px, attributes
-# body_length in px and frames_per_second; convert_zebrafish.py writes them from the published .npy files) and,
+# body_length in px and frames_per_second, convert_zebrafish.py writes them from the published .npy files) and,
 # for the cross-tracking test, the original 2019 tracking of the same videos in DATA/zebrafish2019/ (missing
-# positions NaN; read with the body length and frame rate of the 2023 tracking, so that only the tracking differs).
+# positions NaN, read with the body length and frame rate of the 2023 tracking, so that only the tracking differs).
 
 isdefined(@__MODULE__, :SIM) || include(joinpath(@__DIR__, "..", "paper", "setup.jl"))
 using HDF5

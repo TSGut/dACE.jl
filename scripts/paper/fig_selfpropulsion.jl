@@ -1,10 +1,7 @@
 # julia --project=scripts/paper scripts/paper/fig_selfpropulsion.jl [outdir]
 #
-# Figure 9, from scripts/synthetic/stochastic.jl (results/stochastic.jsonl, stochastic_self.jsonl), one PDF per panel:
-#   fig_selfpropulsion_past.pdf  next-step R² against the relative error of the learned force, the fit without past
-#     joined to the one with the past acceleration as an input, per data set
-#   fig_selfpropulsion_self.pdf  the relative error of the social part and R² of the staged and joint self-term fits,
-#     each joined to the fit without self term
+# Figure 8 (fig_selfpropulsion_{past,self}.pdf), from scripts/synthetic/stochastic.jl (results/stochastic.jsonl,
+# stochastic_self.jsonl)
 
 isdefined(@__MODULE__, :SIM) || include(joinpath(@__DIR__, "setup.jl"))
 

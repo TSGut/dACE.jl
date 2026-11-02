@@ -1,7 +1,7 @@
-# SHINER_R=3 SHINER_GAP=0 julia -t 5 --project=scripts/paper scripts/realdata/shiners_protocol.jl
+# SHINER_R=3 SHINER_GAP=0 julia -t auto --project=scripts/paper scripts/realdata/shiners_protocol.jl
 #
 # Golden shiners (Section 4): leave one trial out, the 1-body law without past and the 1-, 2- and 3-body models
-# with the self term, scored by held-out next-step R². At gap 0 also the 3-body saturation (Figure 11).
+# with the self term, scored by held-out next-step R². At gap 0 also the 3-body saturation (Figure 10).
 # out: results/shiners_R<R>_gap<G>.{jls,md}, a line in results/shiners_protocol.jsonl
 
 include(joinpath(@__DIR__, "shiners.jl"))

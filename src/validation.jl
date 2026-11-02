@@ -1,9 +1,9 @@
 # checks of user input shared by the whole package, at the public boundaries: environments, basis options, data,
-# fit options and regularisation; each throws an ArgumentError or DimensionMismatch that names the input
+# fit options and regularisation, each throws an ArgumentError or DimensionMismatch that names the input
 
 # ---------------------------------------------------------------- environments (2D and 3D)
 
-# r, u and (if given) past_vn: one entry per neighbour; no neighbour at r = 0, whose direction is undefined
+# r, u and (if given) past_vn: one entry per neighbour, none at r = 0, whose direction is undefined
 function check_environment(r, u, past_vn)
     length(u) == length(r) && (isempty(past_vn) || length(past_vn) == length(r)) ||
         throw(DimensionMismatch("r, u and (if given) past_vn must have one entry per neighbour"))

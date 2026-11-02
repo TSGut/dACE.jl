@@ -30,7 +30,7 @@ evaluation_workspaces(b::CompositeBasis) = (evaluation_workspaces(b.interaction)
 smoothness_prior(b::CompositeBasis; p = 4) = [smoothness_prior(b.interaction; p); smoothness_prior(b.selfterm; p)]
 
 # the history a composite needs: that of the interaction basis or of the self model (`basis_history(selfterm)`,
-# `nothing` unless the self model defines it); both only when they agree
+# `nothing` unless the self model defines it), both only when they agree
 function basis_history(b::CompositeBasis)
     hi, hs = basis_history(b.interaction), basis_history(b.selfterm)
     isnothing(hs) && return hi

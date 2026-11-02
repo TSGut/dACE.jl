@@ -1,10 +1,9 @@
-# julia -t 5 --project=scripts/paper scripts/synthetic/stochastic.jl
+# julia -t auto --project=scripts/paper scripts/synthetic/stochastic.jl
 #
-# Stochastic self-propulsion (Section 3.4, Figure 9): the pairwise and 2+3+4-body rules with a time-correlated
-# drive per agent (ou: Ornstein-Uhlenbeck; burst: burst-and-coast), so the observed acceleration is F + d and F is
-# known. 4-body fits scored on driven test simulations by the next-step R² and the relative error against F:
-# (a) with and without the past acceleration as an input, (b) the self term fitted jointly and in stages.
-# out: results/stochastic.jsonl (a), results/stochastic_self.jsonl (b), one line per data set
+# Stochastic self-propulsion (Figure 8): pairwise and 2+3+4-body rules with an Ornstein-Uhlenbeck or burst-and-coast
+# drive, 4-body fits scored by next-step R² and the error against the known F, (a) with and without the past
+# acceleration as input, (b) with the self term fitted jointly and in stages.
+# out: results/stochastic.jsonl (a), results/stochastic_self.jsonl (b)
 
 include(joinpath(@__DIR__, "..", "paper", "setup.jl"))
 using Random

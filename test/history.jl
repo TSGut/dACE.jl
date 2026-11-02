@@ -49,7 +49,7 @@
         e, a = trajectory_data(tr.pos, tr.vel, tr.dt; cutoff = interaction_radius(pair), extent = tr.extent, periodic = true, times = 1:2:39, history = history)
         @test length(e) == 18 * 30
         @test e[1].past_v[2] ≈ tr.vel[:, 1, 3] && e[1].dt == tr.dt && isempty(e[1].past_vn)
-        # recovery: simulated forces plus a self term with known real coefficients; a persistence ρ a(t - Δ)
+        # recovery: simulated forces plus a self term with known real coefficients, a persistence ρ a(t - Δ)
         # is in the span with the linear speed map
         hs, F = Environment{Float64}[], SVector{2, Float64}[]
         for seed in 1:4
@@ -67,7 +67,7 @@
         m = fit(bs, hs, A; λ = 1.0e-8, reflections = true, self_fit = :joint)
         @test rmse(m, hs, A; relative = true) < 1.0e-2
         # staged (default): the interactions are those of the fit without the self term, and the self term is the
-        # ridge fit of their residual; the normal equations, the path and CompositeBasis agree
+        # ridge fit of their residual, the normal equations, the path and CompositeBasis agree
         γ = smoothness_prior(bs)
         K1 = length(ib)
         ms = fit(bs, hs, A; λ = 1.0e-3, λself = 1.0e-4, prior = γ, reflections = true)
@@ -137,7 +137,7 @@
         history = History(selfterm = 1, interactions = (own = 1,), use = :acceleration, interaction_degree = 2, selfterm_degree = (2, 0))
         plain = dACEBasis(maxdeg = (2, 3, 3), maxl = 1)
         bm = dACEBasis(maxdeg = (2, 3, 3), maxl = 1, history = history, ascale = 2.0)
-        # the agent's last state enters the interaction terms; its 1-body dependence is the self term
+        # the agent's last state enters the interaction terms, its 1-body dependence is the self term
         @test length(bm.funcs) > length(plain.funcs)
         @test all(f -> dACE.correlation_order(f) >= 1 || (bm.centres[f.centre].k, bm.centres[f.centre].q) == (0, 0), bm.funcs)
         @test any(f -> dACE.correlation_order(f) >= 1 && bm.centres[f.centre].k != 0, bm.funcs)

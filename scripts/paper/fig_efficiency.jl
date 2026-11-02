@@ -1,6 +1,6 @@
 # julia --project=scripts/paper scripts/paper/fig_efficiency.jl [outdir]
 #
-# Figure 8, from scripts/synthetic/efficiency.jl (results/efficiency.jsonl):
+# Figure 7, from scripts/synthetic/efficiency.jl (results/efficiency.jsonl):
 #   fig_efficiency_{pair,mixed,legend}.pdf  relative force error of dACE 4-body on clean test simulations against the
 #     number of training samples, for the pairwise and 2+3+4-body rules, observation noise ε as the line style
 

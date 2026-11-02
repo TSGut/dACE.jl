@@ -24,7 +24,7 @@ velocity_update(rule::ForceRule, v, neighbours, dt) = v + dt * acceleration(rule
 
 smooth_cutoff(ρ, R) = ρ < R ? (1 - (ρ / R)^2)^2 : zero(ρ)
 
-# C² step from 0 (x ≤ 0) to 1 (x ≥ w); Heaviside for w = 0
+# C² step from 0 (x ≤ 0) to 1 (x ≥ w), Heaviside for w = 0
 function smoothstep(x, w)
     w == 0 && return float(x > 0)
     t = clamp(x / w, 0, 1)

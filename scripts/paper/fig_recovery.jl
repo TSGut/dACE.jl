@@ -1,6 +1,6 @@
 # julia --project=scripts/paper scripts/paper/fig_recovery.jl [outdir]
 #
-# Figure 3, from the split results of figures.jl (OUT/splits.jls):
+# Figure 2, from the split results of figures.jl (OUT/splits.jls):
 #   fig_recovery_{2d,3d,legend}.pdf  relative force error of every collective and model in 2D and 3D, median and range
 
 isdefined(@__MODULE__, :SIM) || include(joinpath(@__DIR__, "setup.jl"))

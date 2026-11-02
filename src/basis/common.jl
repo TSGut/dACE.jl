@@ -1,6 +1,6 @@
 # pieces shared by the 2D and 3D bases: complex powers, input maps, cutoffs, set partitions, degree tuples
 
-# z = x + iy; rotation z ↦ e^{iα} z; output aₓ + i a_y has charge 1
+# z = x + iy, rotation z ↦ e^{iα} z, output aₓ + i a_y has charge 1
 
 cpow(z, m) = m >= 0 ? z^m : conj(z)^(-m)
 

@@ -8,11 +8,11 @@ function arrow!(ax, p, q; color = INK, linewidth = 1.2, headsize = 8)
     scatter!(ax, [Point2f(q)]; marker = :rtriangle, rotation = atan(d[2], d[1]), markersize = headsize, color)
 end
 
-# agents are dots; a velocity or force is an arrow with its head at the front
+# agents are dots, a velocity or force is an arrow with its head at the front
 agent!(ax, x; color = INK, size = 7) = scatter!(ax, [Point2f(x)]; marker = :circle, markersize = size, color, strokewidth = 0)
 
 let
-    BLUE = COLOR["d3"]   # relative position and the coupled groups; PURPLE: relative velocity; FORCE: forces
+    BLUE = COLOR["d3"]   # relative position and the coupled groups, PURPLE relative velocity, FORCE forces
 
     # (a) local environment of agent i
     fig = Figure(size = (0.34WIDTH, 0.34WIDTH), figure_padding = 2)

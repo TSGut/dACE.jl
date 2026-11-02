@@ -1,9 +1,8 @@
-# CONSISTENCY_DATA=zebrafish|shiners julia -t 5 --project=scripts/paper scripts/realdata/consistency.jl
+# CONSISTENCY_DATA=zebrafish|shiners julia -t auto --project=scripts/paper scripts/realdata/consistency.jl
 #
-# Consistency of the learned force law on tracked fish (Section 4, Figure 10): for each held-out group, the
-# memoryless 3-body law fitted on the first n samples of two disjoint halves of the training groups (alternating
-# 20 s blocks, no shared frame), compared on the held-out group. CONSISTENCY_MATCHED=0: each half its own λ.
-# out: results/consistency_<data>[_perhalf].{jsonl,md}
+# Consistency on tracked fish (Figure 9): for each held-out group, the memoryless 3-body law fitted on the first
+# n samples of two disjoint halves (alternating 20 s blocks) and compared on the held-out group.
+# CONSISTENCY_MATCHED=0: each half its own λ. out: results/consistency_<data>[_perhalf].{jsonl,md}
 
 const DATASET = get(ENV, "CONSISTENCY_DATA", "zebrafish")
 DATASET in ("zebrafish", "shiners") || error("CONSISTENCY_DATA must be zebrafish or shiners")
@@ -13,7 +12,7 @@ using Random
 const MATCHED = get(ENV, "CONSISTENCY_MATCHED", "1") == "1"
 const RES = joinpath(@__DIR__, "results")
 mkpath(RES)
-const SIZES = [1000, 2000, 4000, 8000, 16000, 32000, 64000, 10^9]   # per half; the last: all of it
+const SIZES = [1000, 2000, 4000, 8000, 16000, 32000, 64000, 10^9]   # per half, the last all of it
 const NPROBE = 5000
 const BLOCK_S = 20.0   # time blocks alternate between the halves
 const KFRAMES = 3      # the finite-difference step of both data sets

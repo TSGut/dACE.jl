@@ -1,11 +1,8 @@
-# julia -t 5 --project=scripts/paper scripts/synthetic/efficiency.jl
+# julia -t auto --project=scripts/paper scripts/synthetic/efficiency.jl
 #
-# Data efficiency (Figure 8): relative force error of the 4-body model on the clean test simulations of split 1
-# against the number of training simulations (900 samples each), for the pairwise and 2+3+4-body rules, with
-# observation noise ε = 0, 0.01, 0.1 (every recorded position and velocity shifted by a vector of random direction
-# and length uniform in [0, ε]; targets by finite differences of the noisy velocities). λ by the evidence on all
-# training samples, real coefficients.
-# out: results/efficiency.jsonl (appended, one line per fit, so a partial run is kept)
+# Data efficiency (Figure 7): relative force error of the 4-body model against the number of training simulations,
+# pairwise and 2+3+4-body rules, observation noise ε = 0, 0.01, 0.1 on positions and velocities.
+# out: results/efficiency.jsonl (appended, one line per fit)
 
 include(joinpath(@__DIR__, "..", "paper", "setup.jl"))
 using Random

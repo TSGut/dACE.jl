@@ -5,7 +5,7 @@ astuple(x) = ntuple(i -> getfield(x, i), fieldcount(typeof(x)))
 
 # Every setting other than the degrees that changes the values of a basis function: in two bases with equal settings,
 # functions with equal keys (`function_key`) are the same function. A new basis setting that changes values must be
-# added here; bases without settings (`nothing`) never share a design.
+# added here, bases without settings (`nothing`) never share a design.
 ladder_settings(b) = nothing
 ladder_settings(b::dACEBasis) = (:dACEBasis, b.cutoff, b.rscale, b.vscale, b.ascale, b.inputmap, b.history,
     b.inner_envelope, b.charge, b.normaliser, isnothing(b.purification), self_settings(b.selfterm))
