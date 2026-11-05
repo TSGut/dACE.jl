@@ -14,7 +14,7 @@ let
     for (k, data) in enumerate(("zebrafish", "shiners"))
         recs = readlines(joinpath(REAL, "consistency_$data.jsonl"))
         fig = Figure(size = (0.5WIDTH, 165), figure_padding = 2)
-        ax = Axis(fig[1, 1]; xlabel = "training samples per half", ylabel = k == 1 ? "disagreement between halves" : "", xscale = log10,
+        ax = Axis(fig[1, 1]; xlabel = "training samples per half", ylabel = k == 1 ? "relative difference of the two laws" : "", xscale = log10,
             xticks = ([1.0e3, 1.0e4, 1.0e5], ["10³", "10⁴", "10⁵"]), xlabelsize = LABEL, ylabelsize = LABEL, xticklabelsize = TICK, yticklabelsize = TICK)
         tests = unique(match(r"\"test\"\s*:\s*\"([^\"]*)\"", r).captures[1] for r in recs)
         curves = [sort([Point2f(jsonnum(r, "n"), jsonnum(r, "consistency")) for r in recs if occursin("\"test\": \"$t\"", r)]) for t in tests]

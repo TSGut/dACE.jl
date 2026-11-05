@@ -27,7 +27,7 @@ function main()
     kw = (cutoff = RCUT, vscale, inputmap = :tanh)
     mem = History(selfterm = 1:4, selfterm_degree = (8, 4), selfterm_maxm = 2)
     degrees = Dict("1" => (32,), "2" => (32, 12), "3" => (32, 12, 6))
-    bases = [(prefix * n, dACEBasis(; maxdeg = degrees[n], maxl = 0, maxm = 1, history, kw...))
+    bases = [(prefix * n, dACEBasis(; maxdeg = degrees[n], maxl = 2, maxm = 4, history, kw...))
              for (prefix, history) in (("force", nothing), ("self", mem)) for n in ("1", "2", "3")]
     println("vscale $(round(vscale; digits = 2)) BL/s; basis sizes: ", join(["$o $(length(b))" for (o, b) in bases], ", "))
     stats = Dict((o, v) => design_statistics(b, data[v].envs, data[v].accs) for (o, b) in bases for v in ZEBRAFISH_VIDEOS)

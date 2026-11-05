@@ -31,8 +31,8 @@ function main()
     kw = (cutoff = RCUT, vscale = 3.0, inputmap = :tanh)
     mem = History(selfterm = 1:4, selfterm_degree = (8, 4), selfterm_maxm = 2)
     bases = [("force1", dACEBasis(; maxdeg = (4,), kw...)), ("self1", dACEBasis(; maxdeg = (4,), history = mem, kw...)),
-        ("self2", dACEBasis(; maxdeg = (4, 6), maxl = 0, maxm = 1, history = mem, kw...)),
-        ("self3", dACEBasis(; maxdeg = (4, 6, 4), maxl = 0, maxm = 1, history = mem, kw...))]
+        ("self2", dACEBasis(; maxdeg = (4, 6), maxl = 2, maxm = 4, history = mem, kw...)),
+        ("self3", dACEBasis(; maxdeg = (4, 6, 4), maxl = 2, maxm = 4, history = mem, kw...))]
     println("basis sizes: ", join(["$o $(length(b)) ($(length(b.funcs)) interaction)" for (o, b) in bases], ", "))
     stats = Dict((o, t) => design_statistics(b, data[t]...) for (o, b) in bases for t in SHINER_TRIALS)
     fitstaged(o, b, train) = fit(b, reduce(+, [stats[(o, t)] for t in train]); reflections = true)

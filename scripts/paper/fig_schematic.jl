@@ -23,28 +23,29 @@ let
     θs = range(0, 2π; length = 200)
     lines!(ax, R .* cos.(θs), R .* sin.(θs); color = INK2, linewidth = 0.75, linestyle = :dash)
     text!(ax, R / sqrt(2), -R / sqrt(2); text = "R", align = (:left, :top), offset = (3, -2), fontsize = 8, color = INK2)
-    neighbours = [([2.6, 1.6], [0.9, 0.5]), ([-2.2, 2.4], [0.8, -0.2]), ([1.2, -3.0], [1.0, 0.3]),
+    neighbours = [([2.6, 1.6], [0.3, 1.0]), ([-2.2, 2.4], [0.8, -0.2]), ([1.2, -3.0], [1.0, 0.3]),
         ([-3.4, -1.2], [0.6, 0.7]), ([3.8, -1.0], [0.7, 0.6])]
     vi = [1.0, 0.25]
+    S = 1.6   # one scale for every velocity arrow, so that u_ij is visibly v_j - v_i
     outside = ([-4.8, 4.0], [1.0, -0.3])
     agent!(ax, outside[1]; color = (INK2, 0.3), size = 6)
-    arrow!(ax, outside[1], outside[1] .+ 1.1 .* outside[2]; color = (INK2, 0.3), linewidth = 0.8, headsize = 5)
+    arrow!(ax, outside[1], outside[1] .+ S .* outside[2]; color = (INK2, 0.3), linewidth = 0.8, headsize = 5)
     # r_ij and u_ij for one neighbour
     xj, vj = neighbours[1]
     arrow!(ax, [0.0, 0.0], xj; color = BLUE, linewidth = 1.2, headsize = 7)
     text!(ax, xj[1] / 2, xj[2] / 2; text = rich("r", subscript("ij")), offset = (-12, 4), fontsize = 9, color = BLUE)
     uij = vj .- vi
     for (x, v) in neighbours
-        arrow!(ax, x, x .+ 1.1 .* v; color = INK2, linewidth = 0.9, headsize = 6)
+        arrow!(ax, x, x .+ S .* v; color = INK2, linewidth = 0.9, headsize = 6)
         agent!(ax, x; color = INK2, size = 6)
     end
-    arrow!(ax, xj, xj .+ 4 .* uij; color = PURPLE, linewidth = 1.2, headsize = 7)
-    text!(ax, xj[1] + 4uij[1], xj[2] + 4uij[2]; text = rich("u", subscript("ij")), offset = (4, 0), fontsize = 9, color = PURPLE)
+    arrow!(ax, xj, xj .+ S .* uij; color = PURPLE, linewidth = 1.2, headsize = 7)
+    text!(ax, xj[1] + S * uij[1], xj[2] + S * uij[2]; text = rich("u", subscript("ij")), offset = (4, 0), fontsize = 9, color = PURPLE)
     text!(ax, xj[1], xj[2]; text = "j", offset = (4, -11), fontsize = 8, color = INK2)
-    arrow!(ax, [0.0, 0.0], 1.6 .* vi; color = INK, linewidth = 1.4, headsize = 8)
+    arrow!(ax, [0.0, 0.0], S .* vi; color = INK, linewidth = 1.4, headsize = 8)
     agent!(ax, [0.0, 0.0]; size = 9)
     text!(ax, 0.0, 0.0; text = "i", offset = (-4, -12), fontsize = 9, color = INK)
-    text!(ax, 1.6vi[1], 1.6vi[2]; text = rich("v", subscript("i")), offset = (4, -2), fontsize = 9, color = INK)
+    text!(ax, S * vi[1], S * vi[2]; text = rich("v", subscript("i")), offset = (4, -2), fontsize = 9, color = INK)
 
     save(joinpath(OUT, "fig_schematic_env.pdf"), fig)
 

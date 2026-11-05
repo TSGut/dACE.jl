@@ -52,8 +52,8 @@ function main()
             length(unique(filter(>=(0), data[g].block))), count(<(0), data[g].block))
     end
     basis = DATASET == "zebrafish" ?
-        dACEBasis(; maxdeg = (32, 12, 6), maxl = 0, maxm = 1, inputmap = :tanh, cutoff = RCUT, vscale = data["zebrafish_80_1"].vscale) :
-        dACEBasis(; maxdeg = (4, 6, 4), maxl = 0, maxm = 1, inputmap = :tanh, cutoff = RCUT, vscale = 3.0)
+        dACEBasis(; maxdeg = (32, 12, 6), maxl = 2, maxm = 4, inputmap = :tanh, cutoff = RCUT, vscale = data["zebrafish_80_1"].vscale) :
+        dACEBasis(; maxdeg = (4, 6, 4), maxl = 2, maxm = 4, inputmap = :tanh, cutoff = RCUT, vscale = 3.0)
     γ = smoothness_prior(basis)
     println("basis: $(length(basis)) functions")
     rows = NamedTuple[]
