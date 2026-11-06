@@ -1,8 +1,8 @@
 # Reproducing the paper
 
 The scripts under `scripts/` and the `dACESwarms` subpackage, which simulates collectives with
-known interaction rules, produce the dACE content of every figure, table and number of the
-paper.
+known interaction rules, produce the dACE content of every figure, table and number of
+[the paper](https://arxiv.org/abs/2611.08314).
 
 ```sh
 julia --project=. -e 'using Pkg; Pkg.instantiate()'

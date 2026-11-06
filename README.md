@@ -38,7 +38,10 @@ For examples, see [the documentation](https://tsgut.github.io/dACE.jl/dev/).
 
 ## References
 
-The paper detailing the theoretical background of the dACE approach is the primary reference for this package: (TODO)
+The paper detailing the theoretical background of the dACE approach is the primary reference for this package:
+
+T. S. Gutleb, Interpretable many-body interaction laws for collective motion from few trajectories,
+[arXiv:2611.08314](https://arxiv.org/abs/2611.08314) (2026).
 
 If you find this package useful, please also cite the software itself through its Zenodo record,
 [10.5281/zenodo.23762609](https://doi.org/10.5281/zenodo.23762609), which resolves to the latest release.
